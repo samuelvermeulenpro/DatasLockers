@@ -1,0 +1,2 @@
+# Aucun accès direct aux fichiers stockés : tout passe par download.php
+Require all denied

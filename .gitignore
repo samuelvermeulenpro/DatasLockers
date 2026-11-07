@@ -1,0 +1,22 @@
+# Configuration locale (créée par install.php) — contient les accès BDD
+/config.php
+
+# Clé maîtresse de chiffrement (normalement hors du dépôt, par sécurité)
+*.key
+
+# Fichiers envoyés, envois en cours (.chunks), sessions : seul le .htaccess est versionné
+/storage/*
+!/storage/.htaccess
+
+# Éditeurs / système
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Outils PHP éventuels
+/vendor/
+.phpunit.result.cache
+*.log
