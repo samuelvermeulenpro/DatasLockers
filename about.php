@@ -175,5 +175,16 @@ render_header('À propos', 'about');
 </div>
 <?php endif; ?>
 
+<h2>Licence et code source</h2>
+<div class="card prose">
+  <p class="small"><?= e($app) ?> est un logiciel libre distribué sous licence
+    <strong>GNU Affero General Public License v3.0</strong> (AGPL-3.0) : vous pouvez l'utiliser,
+    l'étudier, le modifier et le redistribuer. Une version modifiée proposée en ligne doit mettre son
+    code source à disposition de ses utilisateurs.</p>
+  <?php if (source_url() !== ''): ?>
+    <p class="small"><a class="btn btn-light btn-sm" href="<?= e(source_url()) ?>" rel="noopener">Voir le code source</a></p>
+  <?php endif; ?>
+</div>
+
 <p class="muted small center"><?= e($app) ?> v<?= APP_VERSION ?> — SV Pro, Samuel Vermeulen, Consultant Informatique &amp; Internet</p>
 <?php render_footer();

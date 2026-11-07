@@ -87,7 +87,7 @@ function render_footer(): void
 <footer class="foot">
   <img src="<?= e(url('assets/logo.png')) ?>" alt="SV Pro" width="44" height="44">
   <span><strong>SV Pro</strong> — Samuel Vermeulen, Consultant Informatique &amp; Internet</span>
-  <span><?= e(cfg('app_name', 'SV Pro Downloads')) ?> v<?= APP_VERSION ?> · © <?= date('Y') ?> · <a href="<?= e(url('about.php')) ?>">À propos</a></span>
+  <span><?= e(cfg('app_name', 'SV Pro Downloads')) ?> v<?= APP_VERSION ?> · © <?= date('Y') ?> · <a href="<?= e(url('about.php')) ?>">À propos</a><?php if (source_url() !== ''): ?> · <a href="<?= e(source_url()) ?>" rel="noopener">Code source</a><?php endif; ?></span>
 </footer>
 <script src="<?= e(url('assets/app.js')) ?>?v=<?= APP_VERSION ?>"></script>
 </body>
