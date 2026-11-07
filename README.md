@@ -240,6 +240,7 @@ index.php        Liste publique
 file.php         Fiche : aperçu, intégrité, historique des versions
 download.php     Téléchargement (id, version archivée ou lien de partage)
 preview.php      Affichage en ligne pour l'aperçu (non compté)
+about.php        Page « À propos » : fonctionnement (adaptée au profil et aux réglages)
 checksum.php     Génération d'un fichier de sommes (téléchargement / publication)
 admin/chunk.php  Réception des envois par morceaux (reprise possible)
 admin/import.php Import des fichiers déposés dans le dossier d'import
