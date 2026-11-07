@@ -48,7 +48,10 @@ dans la même famille que Taskman (liste publique, administration authentifiée,
   Le contenu en clair n'est jamais écrit dans le stockage (envois chiffrés à l'arrivée, import chiffré
   pendant sa lecture). Altération et troncature détectées. Conversion de l'existant dans les deux sens,
   en arrière-plan avec progression, chaque fichier contrôlé par son SHA-256.
-- **Comptes** : Membre / Éditeur / Administrateur.
+- **Comptes** : Membre / Éditeur / Administrateur ; page **Mon compte** (clic sur son nom) pour modifier
+  son identifiant et son e-mail, changer son mot de passe ou **supprimer son compte** (mot de passe exigé ;
+  le dernier administrateur actif ne peut pas se supprimer ; journal anonymisé). L'utilisateur choisit
+  de **conserver ou de supprimer du serveur** les fichiers qu'il a envoyés (fiches, versions, liens de partage).
 - **Journal** des téléchargements filtrable, export CSV (compatible Excel), IP tronquées (RGPD) et purge automatique.
 - **Tableau de bord** : volumes, espace disque, histogramme 14 jours, top fichiers.
 

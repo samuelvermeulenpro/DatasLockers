@@ -55,9 +55,9 @@ function render_header(string $title = '', string $active = ''): void
       <?php endforeach; ?>
       <span class="nav-sep"></span>
       <?php if ($u): ?>
-        <span class="userchip" title="<?= e(role_label($u['role'])) ?>">
+        <a class="userchip<?= $active === 'account' ? ' active' : '' ?>" href="<?= e(url('account.php')) ?>" title="Mon compte (<?= e(role_label($u['role'])) ?>)">
           <span class="avatar"><?= e(mb_strtoupper(mb_substr($u['username'], 0, 1))) ?></span><?= e($u['username']) ?>
-        </span>
+        </a>
         <a href="<?= e(url('logout.php?t=' . csrf_token())) ?>" class="btn btn-ghost btn-sm">Déconnexion</a>
       <?php else: ?>
         <a href="<?= e(url('login.php')) ?>" class="btn btn-light btn-sm">Connexion</a>
