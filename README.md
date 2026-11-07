@@ -1,4 +1,4 @@
-# SV Pro Downloads
+# SVPRO - DatasLockers
 
 Gestionnaire de téléchargements de fichiers — PHP 8.1+ / MySQL ou MariaDB, aux couleurs SV Pro,
 dans la même famille que Taskman (liste publique, administration authentifiée, catégories structure › service).
