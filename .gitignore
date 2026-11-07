@@ -1,5 +1,6 @@
 # Configuration locale (créée par install.php) — contient les accès BDD
 /config.php
+/install.php
 
 # Clé maîtresse de chiffrement (normalement hors du dépôt, par sécurité)
 *.key
