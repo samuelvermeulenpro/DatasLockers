@@ -60,6 +60,10 @@ return [
     'send_mode'      => 'php',
     'accel_prefix'   => '/protected-files/',
 
+    // Code source affiché en pied de page (licence AGPL-3.0, art. 13) : si vous modifiez
+    // l'application, indiquez ici l'adresse de VOTRE version modifiée.
+    'source_url'     => 'https://github.com/samuelvermeulenpro/DatasLockers',
+
     'per_page'       => 25,
     'login_max_attempts' => 5,     // par IP sur 15 minutes
 ];

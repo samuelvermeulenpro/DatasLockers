@@ -254,4 +254,12 @@ install/         schema.sql
 storage/         fichiers envoyés (à déplacer hors racine web de préférence)
 ```
 
+## Licence
+
+Distribué sous licence **GNU Affero General Public License v3.0** — voir le fichier [`LICENSE`](LICENSE).
+Vous pouvez utiliser, modifier et redistribuer ce logiciel ; si vous en proposez une version modifiée
+en ligne, vous devez en mettre le code source à disposition de ses utilisateurs (article 13).
+Le pied de page et la page *À propos* affichent un lien **Code source** : si vous modifiez
+l'application, renseignez `source_url` dans `config.php` avec l'adresse de votre version.
+
 © SV Pro — Samuel Vermeulen, Consultant Informatique & Internet

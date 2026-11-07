@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 define('APP_ROOT', dirname(__DIR__));
 define('APP_VERSION', '1.6.2');
+define('APP_SOURCE_URL', 'https://github.com/samuelvermeulenpro/DatasLockers');
 
 if (PHP_VERSION_ID < 80100) {
     http_response_code(500);
@@ -100,6 +101,12 @@ function q(string $sql, array $params = []): PDOStatement
 function e(?string $s): string
 {
     return htmlspecialchars((string) $s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+/** Adresse du code source (AGPL-3.0, art. 13) : 'source_url' de config.php, sinon le dépôt d'origine */
+function source_url(): string
+{
+    return trim((string) cfg('source_url', APP_SOURCE_URL));
 }
 
 function url(string $path = ''): string
