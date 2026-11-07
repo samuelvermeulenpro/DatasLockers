@@ -6,7 +6,7 @@ declare(strict_types=1);
  */
 
 define('APP_ROOT', dirname(__DIR__));
-define('APP_VERSION', '1.6.2');
+define('APP_VERSION', '1.7.0');
 define('APP_SOURCE_URL', 'https://github.com/samuelvermeulenpro/DatasLockers');
 
 if (PHP_VERSION_ID < 80100) {

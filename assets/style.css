@@ -27,6 +27,8 @@ a{color:var(--accent)}
 .mainnav>a:not(.btn):hover,.mainnav>a.active{color:var(--accent);border-bottom-color:var(--accent2)}
 .nav-sep{width:1px;height:1.4rem;background:var(--line)}
 .userchip{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.92rem}
+.mainnav>a.userchip{border-bottom:0;border-radius:999px;padding:.1rem .6rem .1rem .1rem;color:var(--muted)}.mainnav>a.userchip:hover,.mainnav>a.userchip.active{color:var(--fg);background:color-mix(in srgb,var(--accent) 12%,transparent)}
+.danger-zone{border-left:4px solid var(--err)}.danger-zone h3{color:var(--err)}
 .avatar{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--card);font-weight:700;font-size:.8rem;flex:none}
 
 /* Barre d'administration (équivalent .adminbar) */
