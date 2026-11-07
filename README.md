@@ -50,7 +50,8 @@ dans la même famille que Taskman (liste publique, administration authentifiée,
   en arrière-plan avec progression, chaque fichier contrôlé par son SHA-256.
 - **Comptes** : Membre / Éditeur / Administrateur ; page **Mon compte** (clic sur son nom) pour modifier
   son identifiant et son e-mail, changer son mot de passe ou **supprimer son compte** (mot de passe exigé ;
-  le dernier administrateur actif ne peut pas se supprimer ; journal anonymisé, fichiers publiés conservés).
+  le dernier administrateur actif ne peut pas se supprimer ; journal anonymisé). L'utilisateur choisit
+  de **conserver ou de supprimer du serveur** les fichiers qu'il a envoyés (fiches, versions, liens de partage).
 - **Journal** des téléchargements filtrable, export CSV (compatible Excel), IP tronquées (RGPD) et purge automatique.
 - **Tableau de bord** : volumes, espace disque, histogramme 14 jours, top fichiers.
 

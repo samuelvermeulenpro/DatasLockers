@@ -29,6 +29,7 @@ a{color:var(--accent)}
 .userchip{display:inline-flex;align-items:center;gap:.45rem;color:var(--muted);font-size:.92rem}
 .mainnav>a.userchip{border-bottom:0;border-radius:999px;padding:.1rem .6rem .1rem .1rem;color:var(--muted)}.mainnav>a.userchip:hover,.mainnav>a.userchip.active{color:var(--fg);background:color-mix(in srgb,var(--accent) 12%,transparent)}
 .danger-zone{border-left:4px solid var(--err)}.danger-zone h3{color:var(--err)}
+.files-choice{border:1px solid var(--line);border-radius:6px;padding:.6rem .8rem;margin:0 0 .8rem}.files-choice legend{font-weight:500;padding:0 .3rem}.files-choice label.check{display:flex!important;align-items:flex-start;margin-bottom:.4rem}.files-choice label.check input{margin-top:.3rem}
 .avatar{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent);color:var(--card);font-weight:700;font-size:.8rem;flex:none}
 
 /* Barre d'administration (équivalent .adminbar) */

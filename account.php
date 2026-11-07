@@ -35,6 +35,16 @@ $myId    = (int) $me['id'];
 $isAdmin = $me['role'] === 'admin';
 $lastAdmin = $isAdmin && other_active_admins($myId) === 0;
 
+/* Fichiers envoyés par l'utilisateur : fiches dont il a publié le contenu actuel,
+   et versions archivées qu'il a envoyées sur d'autres fiches */
+$myFiles = q('SELECT id FROM ' . t('files') . ' WHERE uploaded_by = ?', [$myId])->fetchAll(PDO::FETCH_COLUMN);
+$myVersions = q('SELECT v.* FROM ' . t('file_versions') . ' v JOIN ' . t('files') . ' f ON f.id = v.file_id
+                 WHERE v.uploaded_by = ? AND (f.uploaded_by IS NULL OR f.uploaded_by <> ?)', [$myId, $myId])->fetchAll();
+$mySize = (float) q('SELECT COALESCE(SUM(size), 0) FROM ' . t('files') . ' WHERE uploaded_by = ?', [$myId])->fetchColumn()
+        + (float) q('SELECT COALESCE(SUM(v.size), 0) FROM ' . t('file_versions') . ' v JOIN ' . t('files') . ' f ON f.id = v.file_id
+                     WHERE f.uploaded_by = ? OR v.uploaded_by = ?', [$myId, $myId])->fetchColumn();
+$hasFiles = $myFiles || $myVersions;
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     csrf_check();
     $action  = (string) ($_POST['action'] ?? '');
@@ -89,10 +99,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_POST['confirm_delete'])) {
             $err[] = 'Cochez la case de confirmation.';
         }
+        $filesChoice = (string) ($_POST['files'] ?? '');
+        if ($hasFiles && !in_array($filesChoice, ['keep', 'delete'], true)) {
+            $err[] = 'Choisissez de conserver ou de supprimer vos fichiers.';
+        }
         if (!$err && !account_check_password($myId, $current)) {
             $err[] = 'Mot de passe incorrect.';
         }
         if (!$err) {
+            $removed = 0;
+            if ($hasFiles && $filesChoice === 'delete') {
+                // fiches complètes (historique, liens de partage, journal) et fichiers sur disque
+                $removed = delete_files($myFiles);
+                // versions archivées envoyées sur des fiches publiées par d'autres
+                foreach ($myVersions as $v) {
+                    delete_version($v);
+                    $removed++;
+                }
+            }
             $pdo = db();
             $pdo->beginTransaction();
             try {
@@ -109,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             session_regenerate_id(true);
             session_destroy();
             session_start();
-            flash('success', 'Votre compte a été supprimé.');
+            flash('success', 'Votre compte a été supprimé' . ($removed ? ', ainsi que ' . $removed . ' fichier(s) du serveur' : '') . '.');
             redirect('index.php');
         }
         unset($err);
@@ -167,8 +191,7 @@ render_header('Mon compte', 'account');
 <section class="card danger-zone">
   <h3>Supprimer mon compte</h3>
   <p class="small">La suppression est <strong>définitive</strong>. Votre compte est effacé et vos téléchargements
-    passés ne sont plus rattachés à votre nom dans le journal.
-    <?php if (has_role('editor')): ?>Les fichiers, versions et liens de partage que vous avez publiés sont conservés.<?php endif; ?></p>
+    passés ne sont plus rattachés à votre nom dans le journal.</p>
   <?php account_errors($errors['delete']); ?>
   <?php if ($lastAdmin): ?>
     <div class="alert alert-warn">Vous êtes le seul administrateur actif : nommez d'abord un autre administrateur
@@ -177,6 +200,17 @@ render_header('Mon compte', 'account');
   <form method="post" class="form" data-confirm="Supprimer définitivement votre compte ?">
     <?= csrf_field() ?><input type="hidden" name="action" value="delete">
     <input type="text" name="username" value="<?= e($me['username']) ?>" autocomplete="username" hidden>
+    <?php if ($hasFiles): ?>
+    <fieldset class="files-choice">
+      <legend>Vos fichiers sur le serveur
+        <span class="muted small">(<?= count($myFiles) ?> fiche(s)<?= $myVersions ? ' et ' . count($myVersions) . ' version(s) archivée(s) sur d\'autres fiches' : '' ?>, <?= human_size($mySize) ?>)</span></legend>
+      <?php $fc = (string) ($_POST['files'] ?? ''); ?>
+      <label class="check"><input type="radio" name="files" value="keep" required<?= $fc === 'keep' ? ' checked' : '' ?>>
+        <span><strong>Les conserver</strong> — ils restent téléchargeables ; les liens de partage continuent de fonctionner.</span></label>
+      <label class="check"><input type="radio" name="files" value="delete"<?= $fc === 'delete' ? ' checked' : '' ?>>
+        <span><strong>Les supprimer du serveur</strong> — fiches, historique des versions et liens de partage effacés définitivement.</span></label>
+    </fieldset>
+    <?php endif; ?>
     <label>Mot de passe<input type="password" name="current_password" required autocomplete="current-password"></label>
     <label class="check"><input type="checkbox" name="confirm_delete" value="1" required> Je comprends que cette action est irréversible.</label>
     <div><button class="btn btn-danger">Supprimer mon compte</button></div>
